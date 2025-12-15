@@ -1,0 +1,22 @@
+.image-popup__container {
+  position: relative;
+  height: fit-content;
+  width: fit-content;
+  margin: 0;
+}
+
+.image-popup__image {
+  display: block;
+  max-width: 75vw;
+  max-height: 75vh;
+}
+
+.image-popup__title {
+  position: absolute;
+  bottom: -35px;
+  font-family: "Inter", Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.2;
+  color: #fff;
+  z-index: 4;
+}

@@ -1,35 +1,60 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+
+import Header from "./components/Header/Header";
+import Main from "./components/Main/Main";
+import Footer from "./components/Footer/Footer";
+
+import Popup from "./components/Main/components/Popup/Popup";
+import NewCard from "./components/Main/components/NewCard/NewCard";
+import EditProfile from "./components/Main/components/EditProfile/EditProfile";
+import EditAvatar from "./components/Main/components/EditAvatar/EditAvatar";
+
+import ImagePopup from "./components/Main/components/ImagePopup/ImagePopup";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [popup, setPopup] = useState(null);
+
+  function handleOpenPopup(popupData) {
+    setPopup(popupData);
+  }
+
+  function handleClosePopup() {
+    setPopup(null);
+  }
+
+  function handleCardClick(card) {
+    handleOpenPopup({
+      title: null,
+      children: <ImagePopup card={card} />,
+    });
+  }
+
+  const newCardPopup = { title: "New place", children: <NewCard /> };
+  const editProfilePopup = { title: "Edit profile", children: <EditProfile /> };
+  const editAvatarPopup = {
+    title: "Change profile image",
+    children: <EditAvatar />,
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="page__content">
+      <Header
+        onAddPlace={() => handleOpenPopup(newCardPopup)}
+        onEditProfile={() => handleOpenPopup(editProfilePopup)}
+        onEditAvatar={() => handleOpenPopup(editAvatarPopup)}
+      />
+
+      <Main onCardClick={handleCardClick} />
+
+      <Footer />
+
+      {popup && (
+        <Popup title={popup.title} onClose={handleClosePopup}>
+          {popup.children}
+        </Popup>
+      )}
+    </div>
+  );
 }
 
-export default App
+export default App;

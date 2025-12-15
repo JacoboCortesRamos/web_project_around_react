@@ -1,0 +1,167 @@
+.popup_closed {
+  display: none;
+}
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+}
+
+/* CONTENEDOR DEL POPUP (caja blanca por defecto) */
+.popup__content {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  display: flex;
+  flex-direction: column;
+
+  background-color: #fff;
+  max-width: 430px;
+  width: calc(100% - 80px);
+  padding: 35px;
+  border-radius: 10px;
+}
+
+/* VARIANTE: POPUP DE IMAGEN (sin recuadro blanco) */
+.popup__content_content_image {
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  box-shadow: none;
+
+  width: fit-content;
+  max-width: none;
+}
+
+/* FORMULARIO DENTRO DEL POPUP */
+.popup__form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* BOTÓN CERRAR (X) */
+.popup__close {
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 40px;
+  height: 40px;
+
+  background: transparent url(../images/Close-Icon.png) center/contain no-repeat;
+  border: none;
+  cursor: pointer;
+}
+
+/* Ajuste X para popup de imagen (pegada a la imagen) */
+.popup__content_content_image .popup__close {
+  top: -35px;
+  right: -30px;
+  width: 30px;
+  height: 30px;
+}
+
+.popup__close-icon {
+  width: 40px;
+  height: 40px;
+}
+
+.popup__title {
+  font-family: "Inter-Black", Arial, sans-serif;
+  font-size: 24px;
+  line-height: 1.2;
+  color: #000;
+  align-self: flex-start;
+  margin: 0;
+  padding-bottom: 54px;
+}
+
+.popup__input {
+  font-family: "Inter", Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.2;
+  color: #000;
+  width: 100%;
+  height: 50px;
+  border: none;
+  border-bottom: 2px solid #c4c4c4;
+}
+
+.popup__input::placeholder {
+  color: #c4c4c4;
+}
+
+.popup__save-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+  background-color: #000;
+  color: #fff;
+  font-family: "Inter", Arial, sans-serif;
+  font-size: 18px;
+  line-height: 1.2;
+  border-radius: 2px;
+  border: none;
+  cursor: pointer;
+  margin-top: 45px;
+}
+
+.popup__save-button:hover {
+  opacity: 0.8;
+}
+
+.popup__save-button:disabled {
+  cursor: not-allowed;
+  border: 2px solid #ccc;
+  background-color: #fff;
+  color: #ccc;
+}
+
+.popup__input-error {
+  display: none;
+  font-family: "Inter", Arial, sans-serif;
+  color: red;
+  font-size: 12px;
+  margin-top: 6px;
+  margin-right: auto;
+}
+
+.popup__input_type_error {
+  border-bottom: 2px solid red;
+}
+
+.popup__input-error_active {
+  display: block;
+}
+
+@media screen and (max-width: 850px) {
+  
+  .popup__form {
+    margin-right: 0;
+  }
+
+  /* X del popup normal */
+  .popup__close {
+    top: -50px;
+    right: 26px;
+    width: 26px;
+    height: 26px;
+  }
+
+  /* X del popup de imagen */
+  .popup__content_content_image .popup__close {
+    top: -35px;
+    right: -30px;
+    width: 30px;
+    height: 30px;
+  }
+}
