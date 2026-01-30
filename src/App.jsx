@@ -52,14 +52,24 @@ function App() {
       .catch((err) => console.error(err));
   }
 
-  function isCardLikedByUser(card, userId) {
-    const likes = Array.isArray(card.likes) ? card.likes : [];
+  function handleUpdateUser(data) {
+    api
+      .updateUserInfo(data)
+      .then((newUserData) => {
+        setCurrentUser(newUserData);
+        handleClosePopup();
+      })
+      .catch((err) => console.error(err));
+  }
 
-    return likes.some((like) => {
-      if (typeof like === "string") return like === userId;
-      if (like && typeof like === "object") return like._id === userId;
-      return false;
-    });
+  function handleUpdateAvatar(data) {
+    api
+      .updateAvatar(data)
+      .then((newUserData) => {
+        setCurrentUser(newUserData);
+        handleClosePopup();
+      })
+      .catch((err) => console.error(err));
   }
 
   function handleCardLike(card) {
@@ -96,7 +106,9 @@ function App() {
   };
 
   return (
-    <CurrentUserContext.Provider value={{ currentUser, setCurrentUser }}>
+    <CurrentUserContext.Provider
+      value={{ currentUser, handleUpdateUser, handleUpdateAvatar }}
+    >
       <div className="page__content">
         <Header
           onAddPlace={() => handleOpenPopup(newCardPopup)}

@@ -1,10 +1,13 @@
+import { useContext } from "react";
 import logo from "../../images/Vector-logo.svg";
-import profileImage from "../../images/profile-image.jpg";
 import editProfileImageIcon from "../../images/Edit-Profile-Image-Icon.png";
 import editIcon from "../../images/Edit-Icon.png";
 import addIcon from "../../images/Add-Icon.png";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 export default function Header({ onAddPlace, onEditProfile, onEditAvatar }) {
+  const { currentUser } = useContext(CurrentUserContext) || {};
+
   return (
     <header className="header">
       <div className="header__container">
@@ -16,7 +19,7 @@ export default function Header({ onAddPlace, onEditProfile, onEditAvatar }) {
           <div className="header__profile-image-container">
             <img
               className="header__profile-image"
-              src={profileImage}
+              src={currentUser?.avatar || ""}
               alt="Profile Image"
             />
 
@@ -35,18 +38,22 @@ export default function Header({ onAddPlace, onEditProfile, onEditAvatar }) {
 
           <div className="header__profile-info">
             <div className="header__title-container">
-              <h1 className="header__title">Jacques Cousteau</h1>
+              <h1 className="header__title">{currentUser?.name || ""}</h1>
 
               <button
                 className="header__edit-button button"
                 type="button"
                 onClick={onEditProfile}
               >
-                <img className="header__edit-icon" src={editIcon} alt="Edit Icon" />
+                <img
+                  className="header__edit-icon"
+                  src={editIcon}
+                  alt="Edit Icon"
+                />
               </button>
             </div>
 
-            <p className="header__subtitle">Explorer</p>
+            <p className="header__subtitle">{currentUser?.about || ""}</p>
           </div>
 
           <button

@@ -16,7 +16,7 @@ export default function NewCard({ onAddPlaceSubmit }) {
         id="card-name"
         maxLength="30"
         minLength="1"
-        name="card-name"
+        name="name"
         placeholder="Title"
         required
         type="text"
